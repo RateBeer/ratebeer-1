@@ -2,9 +2,11 @@ package com.ratebeer.android.gui;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -28,6 +30,7 @@ import com.jakewharton.rxbinding.support.v7.widget.SearchViewQueryTextEvent;
 import com.jakewharton.rxbinding.view.RxView;
 import com.pacoworks.rxtuples.RxTuples;
 import com.ratebeer.android.R;
+import com.ratebeer.android.RateBeerApp;
 import com.ratebeer.android.Session;
 import com.ratebeer.android.api.Api;
 import com.ratebeer.android.api.model.FeedItem;
@@ -186,6 +189,26 @@ public class MainActivity extends RateBeerActivity implements ActivityCompat.OnR
 				.subscribe(suggestions -> searchSuggestionsAdaper.update(suggestions));
 		searchEdit.setInputType(InputType.TYPE_CLASS_TEXT);
 
+		if (!RateBeerApp.hasShownUpdateDialog) {
+			new AlertDialog.Builder(this)
+				.setTitle("Update")
+				.setMessage("This is an older version of the RateBeer app and some functionality may stop working. Download the new one now!")
+				.setPositiveButton("Update", (DialogInterface dialogInterface, int i) -> {
+					final String appPackageName = "com.ratebeer";
+					final String campaignSource = "&referrer=utm_source%3Dlegacy_app";
+					try {
+						startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName + campaignSource)));
+					} catch (android.content.ActivityNotFoundException anfe) {
+						startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName + campaignSource)));
+					}
+				})
+				.setNegativeButton("Cancel", (DialogInterface dialogInterface, int i) -> {
+					dialogInterface.dismiss();
+				})
+				.create()
+			.show();
+		}
+		RateBeerApp.hasShownUpdateDialog = true;
 	}
 
 	@Override

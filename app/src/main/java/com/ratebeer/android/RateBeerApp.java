@@ -8,6 +8,8 @@ import rx.schedulers.Schedulers;
 
 public class RateBeerApp extends Application {
 
+	public static boolean hasShownUpdateDialog = false;
+
 	@Override
 	public void onCreate() {
 		super.onCreate();

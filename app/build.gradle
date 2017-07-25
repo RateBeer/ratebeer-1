@@ -1,8 +1,8 @@
 apply plugin: 'com.android.application'
 
 // Load keystore in root directory
-def keystorePropertiesFileDebug = rootProject.file("../ratebeer.keystore.properties");
-def keystorePropertiesFileSigned = rootProject.file("../../ratebeer.keystore.properties");
+def keystorePropertiesFileDebug = rootProject.file("./ratebeer.keystore.properties");
+def keystorePropertiesFileSigned = rootProject.file("./ratebeer.keystore.properties");
 def keystorePropertiesDebug = new Properties()
 def keystorePropertiesSigned = new Properties()
 try {
@@ -21,8 +21,8 @@ android {
         applicationId 'com.ratebeer.android'
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 213
-        versionName '2.2.1'
+        versionCode 214
+        versionName '2.2.2'
         jackOptions {
             enabled true
         }

@@ -1,8 +1,8 @@
 apply plugin: 'com.android.application'
 
 // Load keystore in root directory
-def keystorePropertiesFileDebug = rootProject.file("../ratebeer.keystore.properties");
-def keystorePropertiesFileSigned = rootProject.file("../../ratebeer.keystore.properties");
+def keystorePropertiesFileDebug = rootProject.file("./ratebeer.keystore.properties");
+def keystorePropertiesFileSigned = rootProject.file("./ratebeer.keystore.properties");
 def keystorePropertiesDebug = new Properties()
 def keystorePropertiesSigned = new Properties()
 try {

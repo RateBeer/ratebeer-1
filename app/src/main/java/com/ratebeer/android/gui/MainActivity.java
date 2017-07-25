@@ -195,10 +195,11 @@ public class MainActivity extends RateBeerActivity implements ActivityCompat.OnR
 				.setMessage("This is an older version of the RateBeer app and some functionality may stop working. Download the new one now!")
 				.setPositiveButton("Update", (DialogInterface dialogInterface, int i) -> {
 					final String appPackageName = "com.ratebeer";
+					final String campaignSource = "&referrer=utm_source%3Dlegacy_app";
 					try {
-						startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
+						startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName + campaignSource)));
 					} catch (android.content.ActivityNotFoundException anfe) {
-						startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
+						startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName + campaignSource)));
 					}
 				})
 				.setNegativeButton("Cancel", (DialogInterface dialogInterface, int i) -> {
